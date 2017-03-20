@@ -1,0 +1,18 @@
+to create env:
+	conda create -n tea_facts python=3
+to install package:
+	conda install numpy pandas matplolib
+to activate env:
+	activate tea_facts
+to deactivate env:
+	deactivate tea_facts
+to intsall jupyter notebook:
+	conda install jupyter notebook
+to export env file:
+	conda env export
+to show env packages: (carnd-term1)
+	conda env list
+to show all juputer notebooks instances
+	jupiter notebook list
+to run jupiter notebook with test.ipynb file
+	jupyter notebook test.ipynb
