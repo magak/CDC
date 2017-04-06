@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<!-- saved from url=(0081)http://www.netinstructions.com/how-to-install-and-run-tensorflow-on-a-windows-pc/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>How to install and run TensorFlow on a Windows PC</title>
+    <meta name="description" content="Everything you need to to get Google&#39;s TensorFlow machine learning library installed and running on a Windows PC. Step-by-step instructions with pictures.">
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="http://www.netinstructions.com/favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="./How to install and run TensorFlow on a Windows PC_files/screen.css">
+    <link rel="stylesheet" type="text/css" href="./How to install and run TensorFlow on a Windows PC_files/css">
+
+    <script src="./How to install and run TensorFlow on a Windows PC_files/ca-pub-3499795748662482.js.download"></script><script async="" src="./How to install and run TensorFlow on a Windows PC_files/analytics.js.download"></script><script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-25699647-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+
+    <link rel="canonical" href="http://www.netinstructions.com/how-to-install-and-run-tensorflow-on-a-windows-pc/">
+    
+    <meta property="og:site_name" content="&#39;Net Instructions">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="How to install and run TensorFlow on a Windows PC">
+    <meta property="og:description" content="Everything you need to to get Google&#39;s TensorFlow machine learning library installed and running on a Windows PC. Step-by-step instructions with pictures.">
+    <meta property="og:url" content="http://www.netinstructions.com/how-to-install-and-run-tensorflow-on-a-windows-pc/">
+    <meta property="article:published_time" content="2015-12-04T20:19:27.757Z">
+    <meta property="article:modified_time" content="2016-12-14T23:49:54.488Z">
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="How to install and run TensorFlow on a Windows PC">
+    <meta name="twitter:description" content="Everything you need to to get Google&#39;s TensorFlow machine learning library installed and running on a Windows PC. Step-by-step instructions with pictures.">
+    <meta name="twitter:url" content="http://www.netinstructions.com/how-to-install-and-run-tensorflow-on-a-windows-pc/">
+    
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "publisher": "'Net Instructions",
+    "author": {
+        "@type": "Person",
+        "name": "Stephen",
+        "url": "http://www.netinstructions.com/author/stephen",
+        "sameAs": null,
+        "description": null
+    },
+    "headline": "How to install and run TensorFlow on a Windows PC",
+    "url": "http://www.netinstructions.com/how-to-install-and-run-tensorflow-on-a-windows-pc/",
+    "datePublished": "2015-12-04T20:19:27.757Z",
+    "dateModified": "2016-12-14T23:49:54.488Z",
+    "description": "Everything you need to to get Google&#x27;s TensorFlow machine learning library installed and running on a Windows PC. Step-by-step instructions with pictures."
+}
+    </script>
+
+    <meta name="generator" content="Ghost 0.6">
+    <link rel="alternate" type="application/rss+xml" title="&#39;Net Instructions" href="http://www.netinstructions.com/rss/">
+    <script async="" src="./How to install and run TensorFlow on a Windows PC_files/adsbygoogle.js.download"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-3499795748662482",
+    enable_page_level_ads: true
+  });
+</script>
+<style id="fit-vids-style">.fluid-width-video-wrapper{width:100%;position:relative;padding:0;}.fluid-width-video-wrapper iframe,.fluid-width-video-wrapper object,.fluid-width-video-wrapper embed {position:absolute;top:0;left:0;width:100%;height:100%;}</style></head>
+<body class="post-template nav-closed">
+
+    
+
+    <div class="site-wrapper">
+
+        
+
+
+<header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        
+    </nav>
+</header>
+
+<main class="content" role="main">
+    <article class="post">
+
+        <header class="post-header">
+            <h1 class="post-title">How to install and run TensorFlow on a Windows PC</h1>
+            <section class="post-meta">
+                <time class="post-date" datetime="2015-12-04">04 December 2015</time> 
+            </section>
+        </header>
+
+        <section class="post-content">
+            <p>If you're involved with machine learning, you probably heard the news by now that Google open-sourced their machine learning library <a href="http://www.tensorflow.org/">TensorFlow</a> a few weeks ago. Excited to dive into TensorFlow, I went to their download and installation page and was disappointed to discover they didn't offer any support or instructions for Windows users. </p>
+
+<p>**<em>Update on November 29, 2016: <a href="https://developers.googleblog.com/2016/11/tensorflow-0-12-adds-support-for-windows.html">TensorFlow 0.12 has added support for Windows 7, 10 and Server 2016</a> today. I'll preserve the rest of the article below in case it's of any use, but you'll probably want to just use the latest version of TensorFlow and <a href="http://www.netinstructions.com/how-to-install-tensorflow-on-windows-without-docker-or-virtual-machines/">follow my new guide here</a> that doesn't require Docker or Oracle VM VirtualBox.</em></p>
+
+<p>But they did have a Docker image! In case you haven't heard, Docker is a container that wraps up a piece of software in a complete filesystem that contains everything it needs to run: code, runtime, system tools, and system libraries. And Docker is available on Windows.</p>
+
+<h3 id="howiwasabletoruntensorflowonmywindowsmachine">How I was able to run TensorFlow on my Windows machine</h3>
+
+<p>First, I <a href="https://www.docker.com/products/docker-toolbox">installed the Docker toolbox for Windows</a>.</p>
+
+<p>(A quick aside -- As of June 2016 it looks like you can use <strong>Docker <em>Toolbox</em> for Windows for Windows  Windows 7 or 8</strong> and the newer, currently in beta <strong>Docker for Windows for Windows 10</strong>. Note the absence of the word 'Toolbox' if you are using Windows 10. Docker is confusing.</p>
+
+<p>Then I opened up the Docker Quickstart Terminal.</p>
+
+<p><img src="./How to install and run TensorFlow on a Windows PC_files/docker-on-windows-machine.png" alt=""></p>
+
+<p>It created a default Docker machine for me. You can view the Docker machines available by typing <code>docker-machine ls</code></p>
+
+<pre><code>$ docker-machine ls
+NAME      ACTIVE   DRIVER       STATE     URL                         SWARM
+default   *        virtualbox   Running   tcp://192.168.99.100:2376
+</code></pre>
+
+<p>I then created a second (new) Docker machine named <code>vdocker</code> by typing:</p>
+
+<pre><code>$ docker-machine create vdocker -d virtualbox
+</code></pre>
+
+<p>Because I was behind a corporate web proxy, I had to connect to that machine and configure it to use my proxy. <strong>This step may not be necessary for you</strong>. If you're having other issues with Docker due to a firewall or web proxy, <a href="http://www.netinstructions.com/how-to-install-docker-on-windows-behind-a-proxy/">see my post here</a>.</p>
+
+<pre><code>$ docker-machine ssh vdocker
+sudo -s
+echo "export HTTP_PROXY=http://proxyhost:8080" &gt;&gt; /var/lib/boot2docker/profile
+echo "export HTTPS_PROXY=http://proxyhost:8080" &gt;&gt; /var/lib/boot2docker/profile
+exit
+exit
+$ docker-machine restart vdocker
+</code></pre>
+
+<p>You exit twice, first to get out of root access, and second to get out of the docker container.</p>
+
+<p>Now if you type <code>docker-machine ls</code> you should see your two Docker machines</p>
+
+<pre><code>NAME      ACTIVE   DRIVER       STATE     URL                         SWARM
+default   *        virtualbox   Running   tcp://192.168.99.100:2376
+vdocker   -        virtualbox   Running   tcp://192.168.99.101:2376
+</code></pre>
+
+<p>Okay, now the Docker machine called 'vdocker' has been created and configured. Now to actually install TensorFlow. Open a <strong>Windows cmd prompt</strong> (not the Docker terminal) and enter the following:</p>
+
+<pre><code>FOR /f "tokens=*" %i IN ('docker-machine env --shell cmd vdocker') DO %i
+</code></pre>
+
+<p>You should see some output from the Docker machine like the following screenshot</p>
+
+<p><img src="./How to install and run TensorFlow on a Windows PC_files/install-tensorflow-windows-docker.png" alt=""></p>
+
+<p>Then type the following line (from the <a href="http://www.tensorflow.org/get_started/os_setup.html#docker_install">Docker install page</a>):</p>
+
+<pre><code>docker run -it -p 8888:8888 gcr.io/tensorflow/tensorflow
+</code></pre>
+
+<p>And it should start downloading the image which looks like</p>
+
+<p><img src="./How to install and run TensorFlow on a Windows PC_files/installing-tensorflow-on-windows.png" alt=""></p>
+
+<p>Because I was behind a corporate web proxy I initially got a <code>docker: An error occurred trying to connect: Post https://192.168.99.101:2376/v1.23/containers/create: Forbidden.</code> which was was resolved by making a <a href="http://www.netinstructions.com/how-to-install-docker-on-windows-behind-a-proxy/#erroroccurredtryingtoconnect">proxy exception using these steps</a>.</p>
+
+<p>After it's done pulling the files and uncompressing them you should get a linux shell. Go ahead and type <code>python</code> and try out TensorFlow on your Windows machine*!</p>
+
+<p><img src="./How to install and run TensorFlow on a Windows PC_files/successful-installation-tensorflow-windows-pc.png" alt=""></p>
+
+<p>*Technically you're running TensorFlow in a Docker container in a VirtualBox Linux virtual machine running in a Windows PC.</p>
+
+<p>Here's the code from the above image:</p>
+
+<pre><code>$ python
+...
+&gt;&gt;&gt; import tensorflow as tf
+&gt;&gt;&gt; hello = tf.constant('Hello, TensorFlow!')
+&gt;&gt;&gt; sess = tf.Session()
+&gt;&gt;&gt; print sess.run(hello)
+Hello, TensorFlow!
+&gt;&gt;&gt; a = tf.constant(10)
+&gt;&gt;&gt; b = tf.constant(32)
+&gt;&gt;&gt; print sess.run(a + b)
+42
+&gt;&gt;&gt;
+</code></pre>
+
+<p>Enjoy using TensorFlow on your Windows computer! If you had any Docker errors and/or are behind a web proxy see the notes <a href="http://www.netinstructions.com/how-to-install-docker-on-windows-behind-a-proxy/">here</a>.</p>
+
+<script async="" src="./How to install and run TensorFlow on a Windows PC_files/adsbygoogle.js.download"></script>  
+<!-- Net Instructions Footer -->  
+<ins class="adsbygoogle" style="display: block; height: 60px;" data-ad-client="ca-pub-3499795748662482" data-ad-slot="1929117901" data-ad-format="auto" data-adsbygoogle-status="done"><ins id="aswift_1_expand" style="display:inline-table;border:none;height:60px;margin:0;padding:0;position:relative;visibility:visible;width:710px;background-color:transparent"><ins id="aswift_1_anchor" style="display:block;border:none;height:60px;margin:0;padding:0;position:relative;visibility:visible;width:710px;background-color:transparent"><iframe width="710" height="60" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;" src="./How to install and run TensorFlow on a Windows PC_files/saved_resource.html"></iframe></ins></ins></ins>
+<script>  
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        </section>
+
+        <footer class="post-footer">
+
+
+
+            <section class="author">
+                <h4><a href="http://www.netinstructions.com/author/stephen/">Stephen</a></h4>
+
+                    <p>Read <a href="http://www.netinstructions.com/author/stephen/">more posts</a> by this author.</p>
+                <div class="author-meta">
+                    
+                    
+                </div>
+            </section>
+
+
+            <section class="share">
+                <h4>Share this post</h4>
+                <a class="icon-twitter" href="https://twitter.com/share?text=How%20to%20install%20and%20run%20TensorFlow%20on%20a%20Windows%20PC&amp;url=http://www.netinstructions.com/how-to-install-and-run-tensorflow-on-a-windows-pc/" onclick="window.open(this.href, &#39;twitter-share&#39;, &#39;width=550,height=235&#39;);return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://www.netinstructions.com/how-to-install-and-run-tensorflow-on-a-windows-pc/" onclick="window.open(this.href, &#39;facebook-share&#39;,&#39;width=580,height=296&#39;);return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=http://www.netinstructions.com/how-to-install-and-run-tensorflow-on-a-windows-pc/" onclick="window.open(this.href, &#39;google-plus-share&#39;, &#39;width=490,height=530&#39;);return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+
+            <div class="disqusbox">
+                <div>
+                    <hr>
+                </div>
+                <p><strong>View or post Comments</strong></p>
+            </div>
+            <div id="disqus_thread">
+                <form onsubmit="my.loadDisqus(); return false;" class="formBlock">
+                    <input class="disqusButton" type="submit" value="Load Comments">
+                </form>
+            </div>
+            <script type="text/javascript">
+                var disqus_shortname = 'netinstructions';
+                var disqus_identifier = '';
+
+                var my = my || {};
+                my.loadDisqus = function() {
+                    var dsq = document.createElement('script');
+                    dsq.type = 'text/javascript';
+                    dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                };
+            </script>
+            <noscript>Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;</noscript>
+
+        </footer>
+
+    </article>
+</main>
+
+<aside class="read-next">
+    <a class="read-next-story no-cover" href="http://www.netinstructions.com/common-postgresql-tasks-on-windows/">
+        <section class="post">
+            <h2>How to perform common PostgreSQL tasks on Windows</h2>
+            <p>This is mostly a how-to guide for my future self, since I keep running into these issues. I decided…</p>
+        </section>
+    </a>
+    <a class="read-next-story prev no-cover" href="http://www.netinstructions.com/simple-web-scraping-with-node-js-and-javascript/">
+        <section class="post">
+            <h2>Simple web scraping with Node.js / JavaScript</h2>
+            <p>Following up on my popular tutorial on how to create an easy web crawler in Node.js I decided…</p>
+        </section>
+    </a>
+</aside>
+
+
+
+        <footer class="site-footer clearfix">
+            <section class="copyright"><a href="http://www.netinstructions.com/">'Net Instructions</a> © 2011-2017</section>
+            <section class="poweredby">Proudly published with <a href="https://ghost.org/">Ghost</a></section>
+        </footer>
+
+    </div>
+
+    <ins class="adsbygoogle" data-adsbygoogle-status="done" style="display: none; width: auto; height: auto;"><ins id="aswift_0_expand" style="display:inline-table;border:none;height:0px;margin:0;padding:0;position:relative;visibility:visible;width:0px;background-color:transparent"><ins id="aswift_0_anchor" style="display:block;border:none;height:0px;margin:0;padding:0;position:relative;visibility:visible;width:0px;background-color:transparent"><iframe width="0" height="0" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;" src="./How to install and run TensorFlow on a Windows PC_files/saved_resource(1).html"></iframe></ins></ins></ins><script src="./How to install and run TensorFlow on a Windows PC_files/jquery.min.js.download"></script>
+
+    <script type="text/javascript" src="./How to install and run TensorFlow on a Windows PC_files/jquery.fitvids.js.download"></script>
+    <script type="text/javascript" src="./How to install and run TensorFlow on a Windows PC_files/index.js.download"></script>
+
+
+
+</body></html>

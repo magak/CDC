@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<!-- saved from url=(0079)http://www.netinstructions.com/how-to-install-docker-on-windows-behind-a-proxy/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>How to install Docker on Windows behind a proxy</title>
+    <meta name="description" content="How to enable VT-x, bypass your corporate proxy, connect to your Docker machine, configure the HTTP proxy there, and deal with common errors along the way.">
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href="http://www.netinstructions.com/favicon.ico">
+
+    <link rel="stylesheet" type="text/css" href="./How to install Docker on Windows behind a proxy_files/screen.css">
+    <link rel="stylesheet" type="text/css" href="./How to install Docker on Windows behind a proxy_files/css">
+
+    <script src="./How to install Docker on Windows behind a proxy_files/ca-pub-3499795748662482.js.download"></script><script async="" src="./How to install Docker on Windows behind a proxy_files/analytics.js.download"></script><script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-25699647-1', 'auto');
+      ga('send', 'pageview');
+    </script>
+
+    <link rel="canonical" href="http://www.netinstructions.com/how-to-install-docker-on-windows-behind-a-proxy/">
+    
+    <meta property="og:site_name" content="&#39;Net Instructions">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="How to install Docker on Windows behind a proxy">
+    <meta property="og:description" content="How to enable VT-x, bypass your corporate proxy, connect to your Docker machine, configure the HTTP proxy there, and deal with common errors along the way.">
+    <meta property="og:url" content="http://www.netinstructions.com/how-to-install-docker-on-windows-behind-a-proxy/">
+    <meta property="article:published_time" content="2015-11-14T01:04:34.860Z">
+    <meta property="article:modified_time" content="2016-02-10T21:47:03.746Z">
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="How to install Docker on Windows behind a proxy">
+    <meta name="twitter:description" content="How to enable VT-x, bypass your corporate proxy, connect to your Docker machine, configure the HTTP proxy there, and deal with common errors along the way.">
+    <meta name="twitter:url" content="http://www.netinstructions.com/how-to-install-docker-on-windows-behind-a-proxy/">
+    
+    <script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "@type": "Article",
+    "publisher": "'Net Instructions",
+    "author": {
+        "@type": "Person",
+        "name": "Stephen",
+        "url": "http://www.netinstructions.com/author/stephen",
+        "sameAs": null,
+        "description": null
+    },
+    "headline": "How to install Docker on Windows behind a proxy",
+    "url": "http://www.netinstructions.com/how-to-install-docker-on-windows-behind-a-proxy/",
+    "datePublished": "2015-11-14T01:04:34.860Z",
+    "dateModified": "2016-02-10T21:47:03.746Z",
+    "description": "How to enable VT-x, bypass your corporate proxy, connect to your Docker machine, configure the HTTP proxy there, and deal with common errors along the way."
+}
+    </script>
+
+    <meta name="generator" content="Ghost 0.6">
+    <link rel="alternate" type="application/rss+xml" title="&#39;Net Instructions" href="http://www.netinstructions.com/rss/">
+    <script async="" src="./How to install Docker on Windows behind a proxy_files/adsbygoogle.js.download"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-3499795748662482",
+    enable_page_level_ads: true
+  });
+</script>
+<style id="fit-vids-style">.fluid-width-video-wrapper{width:100%;position:relative;padding:0;}.fluid-width-video-wrapper iframe,.fluid-width-video-wrapper object,.fluid-width-video-wrapper embed {position:absolute;top:0;left:0;width:100%;height:100%;}</style></head>
+<body class="post-template nav-closed">
+
+    
+
+    <div class="site-wrapper">
+
+        
+
+
+<header class="main-header post-head no-cover">
+    <nav class="main-nav  clearfix">
+        
+    </nav>
+</header>
+
+<main class="content" role="main">
+    <article class="post">
+
+        <header class="post-header">
+            <h1 class="post-title">How to install Docker on Windows behind a proxy</h1>
+            <section class="post-meta">
+                <time class="post-date" datetime="2015-11-14">14 November 2015</time> 
+            </section>
+        </header>
+
+        <section class="post-content">
+            <p>My journey into Docker started with <a href="http://www.tensorflow.org/">TensorFlow</a>, Google's machine learning library. TensorFlow provided no installation instructions for a Windows machine, but they did have instructions for installing it <a href="http://www.tensorflow.org/get_started/os_setup.md#docker-based_installation">using Docker</a>.</p>
+
+<p>Okay, so I guess I'll install Docker first. Unfortunatly that process ended up taking the better half of my morning. Following are my steps for anyone else attempting to jump through the same hoops.</p>
+
+<h2 id="installingthedockertoolbox">Installing the Docker toolbox</h2>
+
+<p>Head over to the <a href="https://www.docker.com/docker-toolbox">Docker Toolbox</a> page to grab the install. At the time of writing it was roughly 202 MB.</p>
+
+<p><img src="./How to install Docker on Windows behind a proxy_files/how-to-install-docker-windows.jpg" alt=""></p>
+
+<p>I installed it with all the default settings. Afterwards I ended up with a few shortcuts. Clicking on the Docker Quickstart Terminal launched a window but returned the following error:</p>
+
+<p><img src="./How to install Docker on Windows behind a proxy_files/docker-error-computer-doesnt-have-vt-x-amd-v-enabled.jpg" alt=""></p>
+
+<p><strong>Error creating machine: Error in driver during machine creation: This computer doesn't have VT-X/AMD-V enabled. Enabling it in the BIOS is mandatory</strong></p>
+
+<h2 id="enablingvtx">Enabling VT-X</h2>
+
+<p>Whoops, looks like <a href="http://docs.docker.com/windows/step_one/">the first step</a> was checking to see if you have this feature enabled. </p>
+
+<p>Microsoft has a <a href="http://www.microsoft.com/en-us/download/details.aspx?id=592">neat little utility</a> you can download that will tell you the same thing... Yup... I don't have hardware virtualization enabled.</p>
+
+<p><img src="./How to install Docker on Windows behind a proxy_files/hardware-assisted-virtualization-not-enabled.png" alt=""></p>
+
+<p><strong>How do you enable VT-x or AMD-v?</strong> Well, for starters, your CPU needs to have the feature built in. You can check by Googling your processor. For example, I'm using an Intel Core i7-3770 processor, which lists the <a href="http://ark.intel.com/products/65719/Intel-Core-i7-3770-Processor-8M-Cache-up-to-3_90-GHz">features here</a>. Specifically this is what I'm looking for</p>
+
+<p><img src="./How to install Docker on Windows behind a proxy_files/intel-vt-x-enabled-vt-d-enabled-specifications.png" alt=""></p>
+
+<p>The next thing you need to do is enable it in your BIOS. BIOS is the program that computers launch before the operating system starts up. I restarted my computer and held down the F12 button to get into the BIOS screen. <strong>Usually there's a very brief flash of text on your screen before Windows starts up that tells you which button you have to hold to get into the BIOS</strong>.</p>
+
+<p>Anyways, once I was there I found the setting and enabled it. I also enabled VT-d in case that offered speed improvements as well.</p>
+
+<p><img src="./How to install Docker on Windows behind a proxy_files/enable-vt-x-vt-d-intel-virtualization-technology-bios-virtual-machine.jpg" alt=""></p>
+
+<p>Now when I double clicked the short cut it created the first virtual machine without any problems. I moved onto the next step by typing <code>docker run hello-world</code> and ran into the next problem:</p>
+
+<p><img src="./How to install Docker on Windows behind a proxy_files/docker-error-trying-to-connect-containers-create-forbidden.png" alt=""></p>
+
+<h2 id="erroroccurredtryingtoconnect">Error occurred trying to connect</h2>
+
+<p><strong>An error occurred trying to connect: Post <a href="https://192.168.99.100:2376/v1.21/containers/create">https://192.168.99.100:2376/v1.21/containers/create</a>: Forbidden</strong></p>
+
+<p>I should mention that I'm running behind a corporate web proxy which causes this problem. It was a little confusing exactly what was going wrong here, but after some trial and error I figured it out.</p>
+
+<p>A <strong>Docker machine</strong> is the combination of a Docker host and a configured client. In this case, we configured a virtual machine with the Docker client on it. We're now trying to talk to that machine located at <code>192.168.99.100:2376</code>, but the proxy gets in the way. You may recognize <code>192.168.XXX.XXX</code> as a private network address, so it's a little strange that our proxy is getting in the way, but nonetheless it is.</p>
+
+<p><strong>We need to a way to avoid using the proxy when talking to our Docker machine.</strong></p>
+
+<p>To get a list of your Docker machines, type <code>docker-machine ls</code></p>
+
+<pre><code>$ docker-machine ls
+NAME      ACTIVE   DRIVER       STATE     URL                         SWARM
+default   *        virtualbox   Running   tcp://192.168.99.100:2376
+</code></pre>
+
+<p>To get the IP address of your default machine you can type <code>docker-machine ip default</code></p>
+
+<p>Therefore, to set the environemtal variable NO_PROXY to this machine's IP address you'll want to type <code>export NO_PROXY=$(docker-machine ip default)</code></p>
+
+<p>You can verify that it's set correctly by outputing all the environtal variables with <code>printenv</code></p>
+
+<pre><code>$ printenv | grep PROXY
+NO_PROXY=192.168.99.100
+HTTP_PROXY=http://proxy.corp:8080
+</code></pre>
+
+<p>Now when you run <code>docker run hello-world</code> you should no longer get the error about trying to connect: Post <a href="https://192.168.99.100:2376/v1.21/containers/create">https://192.168.99.100:2376/v1.21/containers/create</a>: Forbidden</p>
+
+<p>For me, I got a <em>different</em> error:</p>
+
+<p><img src="./How to install Docker on Windows behind a proxy_files/docker-error-while-pulling-image-x509-certificate-signed-by-unknown-authority.png" alt=""></p>
+
+<h2 id="nextsettheproxyonyournewdockermachine">Next, set the proxy on your new Docker machine</h2>
+
+<p>If you ran into </p>
+
+<pre><code>$ docker run hello-world
+Unable to find image 'hello-world:latest' locally
+Pulling repository docker.io/library/hello-world
+Error while pulling image: Get https://index.docker.io/v1/repositories/library/hello-world/images: x509: certificate signed by unknown authority
+</code></pre>
+
+<p>it might mean your Docker machine is unable to connect to the outside world because it isn't setup to use the proxy. </p>
+
+<p>Let's connect to the Docker machine by typing </p>
+
+<pre><code>docker-machine ssh default
+</code></pre>
+
+<p>Once connected to the Docker machine, get root access by typing </p>
+
+<pre><code>sudo -s
+</code></pre>
+
+<p><img src="./How to install Docker on Windows behind a proxy_files/docker-machine-ssh-default.png" alt=""></p>
+
+<p>Then configure the proxy:</p>
+
+<pre><code>echo "export HTTP_PROXY=http://username:password@corporate.proxy.com:port" &gt;&gt; /var/lib/boot2docker/profile
+echo "export HTTPS_PROXY=http://username:password@corporate.proxy.com:port" &gt;&gt; /var/lib/boot2docker/profile
+</code></pre>
+
+<p>You can verify that they've been written to the <code>profile</code> file by typing:</p>
+
+<pre><code>cat /var/lib/boot2docker/profile
+</code></pre>
+
+<p>Then exit out of root by typing <code>exit</code> and then exit out of the SSH session by typing <code>exit</code> again.</p>
+
+<p>Finally restart the Docker machine by typing</p>
+
+<pre><code>docker-machine restart default
+</code></pre>
+
+<h2 id="success">Success!</h2>
+
+<p>You should now be able to run <code>docker run hello-world</code></p>
+
+<p><img src="./How to install Docker on Windows behind a proxy_files/successful-docker-run-hello-world-behind-proxy.png" alt=""></p>
+
+<p>In conclusion, to install Docker on a Windows machine:</p>
+
+<ol>
+<li>First I had to enable Virtualization Technology in my BIOS.  </li>
+<li>Disable the proxy from interfering when connecting to the Docker machine by setting <code>NO_PROXY</code> equal to my new virtual machine's private IP address.  </li>
+<li>Then once I could connect to that virtual machine, I set up the <code>HTTP_PROXY</code> and <code>HTTPS_PROXY</code> equal to my corporate proxy address.  </li>
+<li>After restarting the virtual machine I was able to run the basic hello-world Docker image. </li>
+</ol>
+
+<p>Whew. Now to <a href="http://www.netinstructions.com/how-to-install-and-run-tensorflow-on-a-windows-pc/">actually install TensorFlow</a>...</p>
+
+<h4 id="furtherreading">Further reading</h4>
+
+<p>If you're looking for more Docker resources, check out these books:</p>
+
+<div style="display:flex">  
+     <div style="flex:1;padding-right:5px;">
+          <a href="https://www.amazon.com/dp/1491917571/ref=as_li_ss_til?tag=netinstr-20"><img src="./How to install Docker on Windows behind a proxy_files/docker-up-and-running-book-1.jpg"></a>
+     </div>
+     <div style="flex:1;padding-left:5px;">
+           <a href="https://www.amazon.com/dp/B00LRROTI4/ref=as_li_ss_til?tag=netinstr-20"><img src="./How to install Docker on Windows behind a proxy_files/docker-book-containerization-is-the-new-virtualization.jpg"></a>
+     </div>
+</div>
+
+<p>Good luck!</p>
+
+<script async="" src="./How to install Docker on Windows behind a proxy_files/adsbygoogle.js.download"></script>  
+<!-- Net Instructions Footer -->  
+<ins class="adsbygoogle" style="display: block; height: 60px;" data-ad-client="ca-pub-3499795748662482" data-ad-slot="1929117901" data-ad-format="auto" data-adsbygoogle-status="done"><ins id="aswift_1_expand" style="display:inline-table;border:none;height:60px;margin:0;padding:0;position:relative;visibility:visible;width:710px;background-color:transparent"><ins id="aswift_1_anchor" style="display:block;border:none;height:60px;margin:0;padding:0;position:relative;visibility:visible;width:710px;background-color:transparent"><iframe width="710" height="60" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_1" name="aswift_1" style="left:0;position:absolute;top:0;" src="./How to install Docker on Windows behind a proxy_files/saved_resource.html"></iframe></ins></ins></ins>
+<script>  
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+        </section>
+
+        <footer class="post-footer">
+
+
+
+            <section class="author">
+                <h4><a href="http://www.netinstructions.com/author/stephen/">Stephen</a></h4>
+
+                    <p>Read <a href="http://www.netinstructions.com/author/stephen/">more posts</a> by this author.</p>
+                <div class="author-meta">
+                    
+                    
+                </div>
+            </section>
+
+
+            <section class="share">
+                <h4>Share this post</h4>
+                <a class="icon-twitter" href="https://twitter.com/share?text=How%20to%20install%20Docker%20on%20Windows%20behind%20a%20proxy&amp;url=http://www.netinstructions.com/how-to-install-docker-on-windows-behind-a-proxy/" onclick="window.open(this.href, &#39;twitter-share&#39;, &#39;width=550,height=235&#39;);return false;">
+                    <span class="hidden">Twitter</span>
+                </a>
+                <a class="icon-facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://www.netinstructions.com/how-to-install-docker-on-windows-behind-a-proxy/" onclick="window.open(this.href, &#39;facebook-share&#39;,&#39;width=580,height=296&#39;);return false;">
+                    <span class="hidden">Facebook</span>
+                </a>
+                <a class="icon-google-plus" href="https://plus.google.com/share?url=http://www.netinstructions.com/how-to-install-docker-on-windows-behind-a-proxy/" onclick="window.open(this.href, &#39;google-plus-share&#39;, &#39;width=490,height=530&#39;);return false;">
+                    <span class="hidden">Google+</span>
+                </a>
+            </section>
+
+            <div class="disqusbox">
+                <div>
+                    <hr>
+                </div>
+                <p><strong>View or post Comments</strong></p>
+            </div>
+            <div id="disqus_thread">
+                <form onsubmit="my.loadDisqus(); return false;" class="formBlock">
+                    <input class="disqusButton" type="submit" value="Load Comments">
+                </form>
+            </div>
+            <script type="text/javascript">
+                var disqus_shortname = 'netinstructions';
+                var disqus_identifier = '';
+
+                var my = my || {};
+                my.loadDisqus = function() {
+                    var dsq = document.createElement('script');
+                    dsq.type = 'text/javascript';
+                    dsq.async = true;
+                    dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                };
+            </script>
+            <noscript>Please enable JavaScript to view the &lt;a href="http://disqus.com/?ref_noscript"&gt;comments powered by Disqus.&lt;/a&gt;</noscript>
+
+        </footer>
+
+    </article>
+</main>
+
+<aside class="read-next">
+    <a class="read-next-story no-cover" href="http://www.netinstructions.com/simple-web-scraping-with-node-js-and-javascript/">
+        <section class="post">
+            <h2>Simple web scraping with Node.js / JavaScript</h2>
+            <p>Following up on my popular tutorial on how to create an easy web crawler in Node.js I decided…</p>
+        </section>
+    </a>
+    <a class="read-next-story prev no-cover" href="http://www.netinstructions.com/how-to-make-a-simple-web-crawler-in-javascript-and-node-js/">
+        <section class="post">
+            <h2>How to make a web crawler in JavaScript / Node.js</h2>
+            <p>The two most popular posts on this blog are how to create a web crawler in Python and how…</p>
+        </section>
+    </a>
+</aside>
+
+
+
+        <footer class="site-footer clearfix">
+            <section class="copyright"><a href="http://www.netinstructions.com/">'Net Instructions</a> © 2011-2017</section>
+            <section class="poweredby">Proudly published with <a href="https://ghost.org/">Ghost</a></section>
+        </footer>
+
+    </div>
+
+    <script src="./How to install Docker on Windows behind a proxy_files/jquery.min.js.download"></script>
+
+    <script type="text/javascript" src="./How to install Docker on Windows behind a proxy_files/jquery.fitvids.js.download"></script>
+    <script type="text/javascript" src="./How to install Docker on Windows behind a proxy_files/index.js.download"></script>
+
+
+
+<ins class="adsbygoogle" data-adsbygoogle-status="done" style="display: none; width: auto; height: auto;"><ins id="aswift_0_expand" style="display:inline-table;border:none;height:0px;margin:0;padding:0;position:relative;visibility:visible;width:0px;background-color:transparent"><ins id="aswift_0_anchor" style="display:block;border:none;height:0px;margin:0;padding:0;position:relative;visibility:visible;width:0px;background-color:transparent"><iframe width="0" height="0" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" scrolling="no" allowfullscreen="true" onload="var i=this.id,s=window.google_iframe_oncopy,H=s&amp;&amp;s.handlers,h=H&amp;&amp;H[i],w=this.contentWindow,d;try{d=w.document}catch(e){}if(h&amp;&amp;d&amp;&amp;(!d.body||!d.body.firstChild)){if(h.call){setTimeout(h,0)}else if(h.match){try{h=s.upd(h,i)}catch(e){}w.location.replace(h)}}" id="aswift_0" name="aswift_0" style="left:0;position:absolute;top:0;" src="./How to install Docker on Windows behind a proxy_files/saved_resource(1).html"></iframe></ins></ins></ins><iframe id="google_osd_static_frame_7359626510150" name="google_osd_static_frame" style="display: none; width: 0px; height: 0px;" src="./How to install Docker on Windows behind a proxy_files/saved_resource(2).html"></iframe></body></html>
