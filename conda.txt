@@ -16,3 +16,47 @@ to show all juputer notebooks instances
 	jupiter notebook list
 to run jupiter notebook with test.ipynb file
 	jupyter notebook test.ipynb
+
+
+setup vncserver on machine
+0 sudo apt-get update
+	update all packages
+1 connect ssh to ec2 instance.
+
+2 sudo -s
+	become super user
+3 sudo apt-get install ubuntu-desktop
+  sudo apt-get install vnc4server
+  sudo apt-get install gnome-panel
+	install soft you need
+4 vncserver
+	set the password
+5 vncserver -kill :1
+	kill vncserver
+6 vi .vnc/xstartup
+	to modify configuration file
+7 
+it shoul be like:
+#!/bin/sh
+# Uncomment the following two lines for normal desktop:
+unset SESSION_MANAGER
+# exec /etc/X11/xinit/xinitrc
+gnome-session –session=gnome-classic &
+gnome-panel&
+
++ the rest of the file
+
+8 Press ESC, followed by :wq to save and exit the file
+
+9 Type vncserver again to start vncserver.
+
+10. Download and install tightvnc to connect remote desktop from the following link
+http://www.tightvnc.com/download.php
+
+11. Now run tightvnc viewer
+
+12. Add the port no 5901 in your ec2 security group
+
+13. Write your public ip in remote host text box and port no. publicIp::port
+
+14. Your desktop in ec2 instance is ready and execute the command vncserver after every restart.
